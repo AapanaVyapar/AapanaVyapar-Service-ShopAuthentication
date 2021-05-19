@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+option go_package = ".;pb";
+option java_multiple_files = true;
+option java_package = "com.aapanavyapar.aapanavyapar.services";
+
+
+message LogoutRequest {
+  string apiKey = 104;
+  string token = 36;
+}
+message LogoutResponse{
+  bool status = 37;
+}
