@@ -1,6 +1,6 @@
 version: '3.3'
 services:
-  shopauth_postgres:
+  shop_auth_postgres:
     image: postgres
     restart: always
     env_file:
@@ -14,7 +14,7 @@ services:
       - "${DBPort}:5432"
     volumes:
       - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
-    container_name: shopauth_postgres
+    container_name: shop_auth_postgres
     networks:
       aappanavypar-shopauth-backend:
 
@@ -27,7 +27,7 @@ services:
     ports:
       - "16543:80"
     depends_on:
-      - shopauth_postgres
+      - shop_auth_postgres
     container_name: shop_auth_pg_admmin
     networks:
       aappanavypar-shopauth-frountend:
@@ -39,7 +39,7 @@ services:
     build:
       context: ./redis-sharding/redis-tls-container/
     ports:
-      - "16544:16544"
+      - "17544:17544"
     volumes:
       - ./redis-sharding/redis-tls-container/certs:/etc/certs
     networks:
@@ -52,7 +52,7 @@ services:
       - "${Port}:${Port}"
     restart: on-failure
     depends_on:
-      - shopauth_postgres
+      - shop_auth_postgres
       - redis_tls_shop_auth
     container_name: shop_auth_app
     command: ["./start.sh"]
