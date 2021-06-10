@@ -6,8 +6,8 @@ option java_package = "com.aapanavyapar.aapanavyapar.services";
 
 
 message ResponseData{
-  string token = 30;
-  string refreshToken = 31;
+  string token = 1;
+  string refreshToken = 2;
 
 }
 
@@ -26,11 +26,11 @@ enum ProblemCode {
   UnableToSendOTP = 12;
   InvalidPassword = 13;
   InvalidUserCredentials = 14;
-  UserNotExist = 88;
-  OTPIsAlreadySent = 100;
-  APIKeyNotPresent = 200;
-  UserWithSameContactNumberAlreadyInRegistrationProcess = 210;
-  InternalProblem = 220;
+  UserNotExist = 15;
+  OTPIsAlreadySent = 16;
+  APIKeyNotPresent = 17;
+  UserWithSameContactNumberAlreadyInRegistrationProcess = 18;
+  InternalProblem = 19;
 }
 
 enum OTPResponse{
@@ -83,57 +83,57 @@ enum Status {
 }
 
 message Location {
-  string Longitude = 1;
-  string Latitude = 2;
+  string Longitude = 3;
+  string Latitude = 4;
 
 }
 
 message ShopsNearBy {
-  string shopId = 3;
-  string shopName = 4;
-  string primaryImage = 5;
-  repeated Category category = 6;
-  float rating = 7;
-  string shopkeeper = 8;
-  Location location = 9;
+  string shopId = 5;
+  string shopName = 6;
+  string primaryImage = 7;
+  repeated Category category = 8;
+  float rating = 9;
+  string shopkeeper = 10;
+  Location location = 11;
 
 }
 
 message ProductsOfShopsNearBy {
-  string productId = 15;
-  string shopId = 16;
-  string productName = 17;
-  string primaryImage = 18;
-  repeated Category category = 19;
-  uint64 likes = 20;
+  string productId = 12;
+  string shopId = 13;
+  string productName = 14;
+  string primaryImage = 15;
+  repeated Category category = 16;
+  uint64 likes = 17;
 }
 
 message Address {
-  string FullName = 118;
-  string HouseDetails = 119;
-  string StreetDetails = 120;
-  string LandMark = 121;
-  string PinCode = 122;
-  string City = 123;
-  string State = 124;
-  string Country = 125;
-  string PhoneNo = 126;
+  string FullName = 18;
+  string HouseDetails = 19;
+  string StreetDetails = 20;
+  string LandMark = 21;
+  string PinCode = 22;
+  string City = 23;
+  string State = 24;
+  string Country = 25;
+  string PhoneNo = 26;
 }
 
 message OperationalHours {
-  repeated string Sunday = 12;
-  repeated string Monday = 13;
-  repeated string Tuesday = 14;
-  repeated string Wednesday = 15;
-  repeated string Thursday = 16;
-  repeated string Friday = 17;
-  repeated string Saturday = 18;
+  repeated string Sunday = 27;
+  repeated string Monday = 28;
+  repeated string Tuesday = 29;
+  repeated string Wednesday = 30;
+  repeated string Thursday = 31;
+  repeated string Friday = 32;
+  repeated string Saturday = 33;
 }
 
 message RatingOfShop {
-  string UserName = 67;
-  string Comment = 68;
-  Ratings Rating = 69;
-  string timestamp = 70;
+  string UserName = 34;
+  string Comment = 35;
+  Ratings Rating = 36;
+  string timestamp = 37;
 
 }

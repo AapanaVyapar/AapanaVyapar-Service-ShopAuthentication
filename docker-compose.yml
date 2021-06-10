@@ -25,7 +25,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
       PGADMIN_DEFAULT_PASSWORD: "test123!"
     ports:
-      - "16543:80"
+      - "19543:80"
     depends_on:
       - shop_auth_postgres
     container_name: shop_auth_pg_admmin
