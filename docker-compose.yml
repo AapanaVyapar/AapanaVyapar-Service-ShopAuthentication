@@ -1,0 +1,67 @@
+version: '3.3'
+services:
+  shop_auth_postgres:
+    image: postgres
+    restart: always
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${DBUser}
+      - POSTGRES_PASSWORD=${DBPassword}
+      - POSTGRES_DB=${DBName}
+
+    ports:
+      - "${DBPort}:5432"
+    volumes:
+      - ./docker_postgres_init.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
+    container_name: shop_auth_postgres
+    networks:
+      aappanavypar-shopauth-backend:
+
+
+  shop_auth_pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "test@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "test123!"
+    ports:
+      - "19543:80"
+    depends_on:
+      - shop_auth_postgres
+    container_name: shop_auth_pg_admmin
+    networks:
+      aappanavypar-shopauth-frountend:
+      aappanavypar-shopauth-backend:
+
+
+  redis_tls_shop_auth:
+    container_name: redis_tls_shop_auth
+    build:
+      context: ./redis-sharding/redis-tls-container/
+    ports:
+      - "17544:17544"
+    volumes:
+      - ./redis-sharding/redis-tls-container/certs:/etc/certs
+    networks:
+      aappanavypar-shopauth-backend:
+
+
+  shop_auth_app:
+    build: .
+    ports:
+      - "${Port}:${Port}"
+    restart: on-failure
+    depends_on:
+      - shop_auth_postgres
+      - redis_tls_shop_auth
+    container_name: shop_auth_app
+    command: ["./start.sh"]
+    networks:
+      aappanavypar-shopauth-frountend:
+      aappanavypar-shopauth-backend:
+
+# Custom network so all services can communicate using a FQDN
+networks:
+    aappanavypar-shopauth-frountend:
+    aappanavypar-shopauth-backend:
+

@@ -1,0 +1,11 @@
+version: "3.3"
+
+services:
+  redis_tls_shop_auth:
+    container_name: redis_tls_shop_auth
+    build:
+      context: ./
+    ports:
+      - "17544:17544"
+    volumes:
+      - ./certs:/etc/certs
